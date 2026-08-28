@@ -1,0 +1,18 @@
+name: orden-dev
+
+services:
+  postgres-orden-dev:
+    image: postgres:16-alpine
+    container_name: pagatu-postgres-orden-dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: orden_db
+      POSTGRES_USER: orden
+      POSTGRES_PASSWORD: orden
+    ports:
+      - "15433:5432"
+    volumes:
+      - orden_dev_data:/var/lib/postgresql/data
+
+volumes:
+  orden_dev_data:
