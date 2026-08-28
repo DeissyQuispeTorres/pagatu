@@ -3,3 +3,5 @@ spring:
     name: orden-ms
   profiles:
     active: dev
+  config:
+    import: "optional:configserver:http://localhost:18888"
