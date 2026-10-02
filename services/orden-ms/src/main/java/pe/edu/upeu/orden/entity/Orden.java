@@ -9,26 +9,30 @@ import java.util.List;
 
 @Entity
 @Table(name = "ordenes")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+@Getter @Setter @Builder @NoArgsConstructor @AllArgsConstructor
 public class Orden {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "cliente_nombre", nullable = false)
-    private String clienteNombre;
+    @Column(name = "id_cliente")
+    private Long idCliente;
 
-    @Column(nullable = false)
-    private LocalDateTime fecha;
+    @Column(name = "metodo_pago", length = 20)
+    private String metodoPago;
 
-    @Column(nullable = false)
-    private String estado;
+    @Column(name = "fecha_creacion", nullable = false)
+    @Builder.Default
+    private LocalDateTime fechaCreacion = LocalDateTime.now();
 
-    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    @Builder.Default
+    private EstadoOrden estado = EstadoOrden.CARRITO;
+
     private BigDecimal total;
 
     @OneToMany(mappedBy = "orden", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private List<DetalleOrden> detalles = new ArrayList<>();
+    private List<OrdenDetalle> detalles = new ArrayList<>();
 }

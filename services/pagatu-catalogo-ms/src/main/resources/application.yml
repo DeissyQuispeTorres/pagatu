@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: pagatu-catalogo-ms
+  profiles:
+    active: dev
+  config:
+    import: "optional:configserver:http://localhost:18888"

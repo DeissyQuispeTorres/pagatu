@@ -1,0 +1,13 @@
+﻿name: pagatu-obs-dev
+
+services:
+  pagatu-prometheus:
+    image: prom/prometheus:v3.14.0
+    container_name: pagatu-prometheus-dev
+    restart: unless-stopped
+    ports:
+      - "19090:9090"
+    volumes:
+      - ./prometheus/prometheus-dev.yml:/etc/prometheus/prometheus.yml:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

@@ -2,33 +2,16 @@ package pe.edu.upeu.orden.dto;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-import java.math.BigDecimal;
 import java.util.List;
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+@Getter @Setter @Builder @NoArgsConstructor @AllArgsConstructor
 public class OrdenRequest {
-
-    @NotBlank(message = "El cliente es obligatorio")
-    private String clienteNombre;
-
-    @NotNull(message = "El total es obligatorio")
-    private BigDecimal total;
-
-    @NotNull(message = "Los detalles son obligatorios")
+    private Long idCliente;
+    @NotBlank
+    private String metodoPago;
+    @NotEmpty
     @Valid
-    private List<DetalleRequest> detalles;
-
-    @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
-    public static class DetalleRequest {
-        @NotNull(message = "productoId obligatorio")
-        private Long productoId;
-
-        @NotNull(message = "cantidad obligatoria")
-        private Integer cantidad;
-
-        @NotNull(message = "precioUnitario obligatorio")
-        private BigDecimal precioUnitario;
-    }
+    private List<DetalleOrdenRequest> detalles;
 }
